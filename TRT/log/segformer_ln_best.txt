@@ -1,0 +1,115 @@
+&&&& RUNNING TensorRT.trtexec [TensorRT v8401] # /usr/local/TensorRT-8.4.1.4/bin/trtexec --onnx=/root/onnx/segformer.b2.1024x1024.city.160k_v2.onnx --minShapes=input:1x3x1024x1024 --optShapes=input:4x3x1024x1024 --maxShapes=input:8x3x1024x1024 --workspace=23000 --saveEngine=./engine/segFormer_ln_best.plan --verbose --best --precisionConstraints=obey --calib=/home/pengsky/TRT-Hackathon-2022-SegFormer/TRT/python/segformer_calibration_backup.cache --tacticSources=-CUDNN,+CUBLAS --plugins=/home/pengsky/TRT-Hackathon-2022-SegFormer/TRT/LayerNormPlugin/LayerNorm.so
+[06/15/2022-19:28:00] [I] === Model Options ===
+[06/15/2022-19:28:00] [I] Format: ONNX
+[06/15/2022-19:28:00] [I] Model: /root/onnx/segformer.b2.1024x1024.city.160k_v2.onnx
+[06/15/2022-19:28:00] [I] Output:
+[06/15/2022-19:28:00] [I] === Build Options ===
+[06/15/2022-19:28:00] [I] Max batch: explicit batch
+[06/15/2022-19:28:00] [I] Memory Pools: workspace: 23000 MiB, dlaSRAM: default, dlaLocalDRAM: default, dlaGlobalDRAM: default
+[06/15/2022-19:28:00] [I] minTiming: 1
+[06/15/2022-19:28:00] [I] avgTiming: 8
+[06/15/2022-19:28:00] [I] Precision: FP32+FP16+INT8 (obey precision constraints)
+[06/15/2022-19:28:00] [I] LayerPrecisions: 
+[06/15/2022-19:28:00] [I] Calibration: /home/pengsky/TRT-Hackathon-2022-SegFormer/TRT/python/segformer_calibration_backup.cache
+[06/15/2022-19:28:00] [I] Refit: Disabled
+[06/15/2022-19:28:00] [I] Sparsity: Disabled
+[06/15/2022-19:28:00] [I] Safe mode: Disabled
+[06/15/2022-19:28:00] [I] DirectIO mode: Disabled
+[06/15/2022-19:28:00] [I] Restricted mode: Disabled
+[06/15/2022-19:28:00] [I] Build only: Disabled
+[06/15/2022-19:28:00] [I] Save engine: ./engine/segFormer_ln_best.plan
+[06/15/2022-19:28:00] [I] Load engine: 
+[06/15/2022-19:28:00] [I] Profiling verbosity: 0
+[06/15/2022-19:28:00] [I] Tactic sources: cublas [ON], cudnn [OFF], 
+[06/15/2022-19:28:00] [I] timingCacheMode: local
+[06/15/2022-19:28:00] [I] timingCacheFile: 
+[06/15/2022-19:28:00] [I] Input(s)s format: fp32:CHW
+[06/15/2022-19:28:00] [I] Output(s)s format: fp32:CHW
+[06/15/2022-19:28:00] [I] Input build shape: input=1x3x1024x1024+4x3x1024x1024+8x3x1024x1024
+[06/15/2022-19:28:00] [I] Input calibration shape: input=1x3x1024x1024+4x3x1024x1024+8x3x1024x1024
+[06/15/2022-19:28:00] [I] === System Options ===
+[06/15/2022-19:28:00] [I] Device: 0
+[06/15/2022-19:28:00] [I] DLACore: 
+[06/15/2022-19:28:00] [I] Plugins: /home/pengsky/TRT-Hackathon-2022-SegFormer/TRT/LayerNormPlugin/LayerNorm.so
+[06/15/2022-19:28:00] [I] === Inference Options ===
+[06/15/2022-19:28:00] [I] Batch: Explicit
+[06/15/2022-19:28:00] [I] Input inference shape: input=4x3x1024x1024
+[06/15/2022-19:28:00] [I] Iterations: 10
+[06/15/2022-19:28:00] [I] Duration: 3s (+ 200ms warm up)
+[06/15/2022-19:28:00] [I] Sleep time: 0ms
+[06/15/2022-19:28:00] [I] Idle time: 0ms
+[06/15/2022-19:28:00] [I] Streams: 1
+[06/15/2022-19:28:00] [I] ExposeDMA: Disabled
+[06/15/2022-19:28:00] [I] Data transfers: Enabled
+[06/15/2022-19:28:00] [I] Spin-wait: Disabled
+[06/15/2022-19:28:00] [I] Multithreading: Disabled
+[06/15/2022-19:28:00] [I] CUDA Graph: Disabled
+[06/15/2022-19:28:00] [I] Separate profiling: Disabled
+[06/15/2022-19:28:00] [I] Time Deserialize: Disabled
+[06/15/2022-19:28:00] [I] Time Refit: Disabled
+[06/15/2022-19:28:00] [I] Inputs:
+[06/15/2022-19:28:00] [I] === Reporting Options ===
+[06/15/2022-19:28:00] [I] Verbose: Enabled
+[06/15/2022-19:28:00] [I] Averages: 10 inferences
+[06/15/2022-19:28:00] [I] Percentile: 99
+[06/15/2022-19:28:00] [I] Dump refittable layers:Disabled
+[06/15/2022-19:28:00] [I] Dump output: Disabled
+[06/15/2022-19:28:00] [I] Profile: Disabled
+[06/15/2022-19:28:00] [I] Export timing to JSON file: 
+[06/15/2022-19:28:00] [I] Export output to JSON file: 
+[06/15/2022-19:28:00] [I] Export profile to JSON file: 
+[06/15/2022-19:28:00] [I] 
+[06/15/2022-19:28:00] [I] === Device Information ===
+[06/15/2022-19:28:00] [I] Selected Device: NVIDIA A10
+[06/15/2022-19:28:00] [I] Compute Capability: 8.6
+[06/15/2022-19:28:00] [I] SMs: 72
+[06/15/2022-19:28:00] [I] Compute Clock Rate: 1.695 GHz
+[06/15/2022-19:28:00] [I] Device Global Memory: 22731 MiB
+[06/15/2022-19:28:00] [I] Shared Memory per SM: 100 KiB
+[06/15/2022-19:28:00] [I] Memory Bus Width: 384 bits (ECC enabled)
+[06/15/2022-19:28:00] [I] Memory Clock Rate: 6.251 GHz
+[06/15/2022-19:28:00] [I] 
+[06/15/2022-19:28:00] [I] TensorRT version: 8.4.1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::GridAnchor_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::GridAnchorRect_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::NMS_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::Reorg_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::Region_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::Clip_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::LReLU_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::PriorBox_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::Normalize_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::ScatterND version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::RPROI_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::BatchedNMS_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::BatchedNMSDynamic_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::BatchTilePlugin_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::FlattenConcat_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::CropAndResize version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::CropAndResizeDynamic version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::DetectionLayer_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::EfficientNMS_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::EfficientNMS_ONNX_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::EfficientNMS_Explicit_TF_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::EfficientNMS_Implicit_TF_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::ProposalDynamic version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::Proposal version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::ProposalLayer_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::PyramidROIAlign_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::ResizeNearest_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::Split version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::SpecialSlice_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::InstanceNormalization_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::InstanceNormalization_TRT version 2
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::CoordConvAC version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::DecodeBbox3DPlugin version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::GenerateDetection_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::MultilevelCropAndResize_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::MultilevelProposeROI_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::NMSDynamic_TRT version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::PillarScatterPlugin version 1
+[06/15/2022-19:28:00] [V] [TRT] Registered plugin creator - ::VoxelGeneratorPlugin version 1
+[06/15/2022-19:28:00] [I] Loading supplied plugin library: /home/pengsky/TRT-Hackathon-2022-SegFormer/TRT/LayerNormPlugin/LayerNorm.so
+[06/15/2022-19:28:00] [I] [TRT] [MemUsageChange] Init CUDA: CPU +328, GPU +0, now: CPU 336, GPU 403 (MiB)
+[06/15/2022-19:28:01] [I] [TRT] [MemUsageChange] Init builder kernel library: CPU +327, GPU +104, now: CPU 682, GPU 507 (MiB)
+[06/15/2022-19:28:01] [I] Start parsing network model

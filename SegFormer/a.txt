@@ -1,0 +1,39 @@
+==PROF== Connected to process 28153 (/home/pengsky/anaconda3/envs/segformer/bin/python3.7)
+{0: 113271, 1: 5756, 2: 72321, 4: 1437, 5: 168, 7: 103, 8: 23524, 10: 4101, 12: 512, 13: 40746, 18: 205}
+{0: 89776, 1: 5073, 2: 65306, 3: 730, 4: 2177, 5: 1069, 6: 273, 7: 1173, 8: 21318, 9: 367, 10: 3738, 11: 198, 12: 861, 13: 37548, 14: 837, 15: 13, 17: 32, 18: 91, 255: 31564}
+road 0.7752587955515143
+sidewalk 0.7955562924888079
+building 0.8870333045397831
+wall 0.0
+fence 0.44849699398797593
+pole 0.006509357200976403
+traffic light 0.0
+traffic sign 0.0777027027027027
+vegetation 0.8584276182187409
+terrain 0.0
+sky 0.812485549132948
+person 0.0
+rider 0.33690360272638753
+car 0.9037591791081068
+truck 0.0
+bus 0.0
+train 0
+motorcycle 0.0
+bicycle 0.34545454545454546
+==PROF== Disconnected from process 28153
+==WARNING== No kernels were profiled.
+==WARNING== Profiling kernels launched by child processes requires the --target-processes all option.
+
+trtexec   bug
+
+1. testSegformer.py  npz npz plan 
+python trt cuda 
+
+2. ln plugin 
+
+3. fp16 int8
+
+4. trandformer plugin 
+
+5. 单张输出 数据集批量推理   脚本 论文指标
+

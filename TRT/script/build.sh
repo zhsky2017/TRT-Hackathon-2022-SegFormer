@@ -1,0 +1,9 @@
+    /usr/local/TensorRT-8.4.1.4/bin/trtexec \
+	--onnx=/root/onnx/segformer.b2.1024x1024.city.160k_v1.onnx \
+    --minShapes=input:1x3x1024x1024 \
+    --optShapes=input:4x3x1024x1024 \
+    --maxShapes=input:8x3x1024x1024 \
+    --workspace=23000 \
+    --saveEngine=/home/pengsky/TRT-Hackathon-2022-SegFormer/TRT/engine/segFormer.plan \
+    --verbose \
+    > /home/pengsky/TRT-Hackathon-2022-SegFormer/TRT/log/segformer.txt
