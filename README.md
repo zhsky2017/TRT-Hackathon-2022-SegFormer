@@ -11,7 +11,7 @@
 │   │   ├── segformer.b1.1024x1024.city.160k.onnx
 │   │   └── segformer.b2.1024x1024.city.160k.onnx
 │   └── tools
-│       ├── data_make.py
+│       ├── data_make.py     			 # make test data for different batch_size
 │       ├── onnxruntime_test.py
 │       ├── pytorch2onnx.py
             ...
@@ -121,7 +121,7 @@ Segformer有以下特点：
 我们将从最简单的`trtexec`命令行开始构建`segFormer`的序列化引擎。
 ```cpp
 trtexec \
-	--onnx=/path_to_onnx/segformer.b2.1024x1024.city.160k.onnx \
+    --onnx=/path_to_onnx/segformer.b2.1024x1024.city.160k.onnx \
     --minShapes=input:1x3x1024x1024 \
     --optShapes=input:4x3x1024x1024 \
     --maxShapes=input:8x3x1024x1024 \
@@ -135,7 +135,9 @@ trtexec \
 chmod u+x build.sh # 赋予shell脚本权限
 ./build.sh
 ```
+
         如果一切顺利的话，我们只需等待构建完成就可以看到生成的序列化引擎文件`segFormer.plan`了，可惜事与愿违，我们收获了如下错误：
+
 ```cpp
 [06/10/2022-16:28:05] [E] [TRT] ModelImporter.cpp:779: ERROR: ModelImporter.cpp:180 In function parseGraph:
 [6] Invalid Node - Pad_2408
