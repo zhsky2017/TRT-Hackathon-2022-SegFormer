@@ -220,6 +220,9 @@ r0: median of relative difference of output 0
 nsys profile -o segformer-fp32-moPlugin --force-overwrite true  trtexec --loadEngine=/path_to_engine/segFormer_fp32.plan --iterations=10 --idleTime=500 --duration=0 --useSpinWait 
 ```
 本地打开profile文件，可以发现：
+
+
+
 <a name="JRACk"></a>
 #### GELU算子自动融合
 <br />![image.png](https://cdn.nlark.com/yuque/0/2022/png/12976256/1656082928773-6437e0bb-354b-4cfb-8db2-f8dcbccdfce3.png#clientId=u7e45191a-b316-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=295&id=u26d0deff&margin=%5Bobject%20Object%5D&name=image.png&originHeight=742&originWidth=1526&originalType=binary&ratio=1&rotation=0&showTitle=false&size=60655&status=done&style=none&taskId=u1d3c8e35-45da-4113-b547-ab5fc3e04ea&title=&width=607)<br />图示的GELU的onnx算子在TRT中被自动融合成：
@@ -262,6 +265,7 @@ Add_53)
 <br />可以看到，图融合后TRT仍然使用了三个层来实现LayerNorm，这显然是不够高效的，并且在SegFormer中有53个LayerNorm算子，符合热点代码的特征，我们可以尝试写一个高效的Plugin来实现。
 <a name="d8Hta"></a>
 #### Attention层融合
+![](Docs/Segformer_nsight.png)
 <br />在查看TRT生成的engine中耗时的层可以发现，有16个ForeignNode开头的层耗时相对较多，而恰巧在SegFormer的Encoder中有16个Transformer Block，很容易联想是TRT自动融合了Transformer Block中的一部分算子，我们来一探究竟。<br />![image.png](https://cdn.nlark.com/yuque/0/2022/png/12976256/1656084366047-056f8eab-620c-4dfc-aece-4f044d6c53b9.png#clientId=u7e45191a-b316-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=75&id=uc01b287d&margin=%5Bobject%20Object%5D&name=image.png&originHeight=150&originWidth=2286&originalType=binary&ratio=1&rotation=0&showTitle=false&size=51925&status=done&style=none&taskId=u88f61b32-fa6a-4a38-ad70-6c5a6e2b902&title=&width=1143)<br />以其中一个ForeignNode为例，我们定位到它在计算图中处于Conv_93和Conv_166中，对应到onnx中便是：<br />![image.png](https://cdn.nlark.com/yuque/0/2022/png/12976256/1656084576869-3b409924-9b17-409e-9074-c9da0a4cae69.png#clientId=u7e45191a-b316-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=1463&id=u785fc5f2&margin=%5Bobject%20Object%5D&name=image.png&originHeight=2925&originWidth=1446&originalType=binary&ratio=1&rotation=0&showTitle=false&size=314325&status=done&style=none&taskId=ue7c66567-9920-488d-8ca4-255ce454352&title=&width=723)<br />onnx中的计算子图虽然看上去比较复杂，但是简单梳理下<br />（1）忽略形状相关的算子（TRT自带形状推理器，会在构建期推理每个层的输出Shape）<br />（2）该子图实际包含2个LayerNorm算子和1个Attention算子<br />由此我们可以看出TRT是有非常强大的图融合能力，我们在后续优化中要尽量避免破坏它的融合（除非融合的层有精度问题）。<br />小结：我们使用了Nsight System对构建的engine进行Profile，观察TRT自动图融合并找到了LayerNorm可以优化的地方。
 
 <a name="cEgNt"></a>
